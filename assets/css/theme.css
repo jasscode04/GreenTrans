@@ -1,0 +1,115 @@
+/* =====================================================
+   GreenTrans - Theme System (CSS Custom Properties)
+   Light & Dark Mode Design Tokens
+   ===================================================== */
+
+:root {
+    /* === BRAND COLORS === */
+    --gt-primary: #10b981;
+    --gt-primary-light: #34d399;
+    --gt-primary-dark: #059669;
+    --gt-primary-rgb: 16, 185, 129;
+    --gt-secondary: #6366f1;
+    --gt-secondary-light: #818cf8;
+    --gt-accent: #f59e0b;
+    --gt-accent-light: #fbbf24;
+
+    /* === SEMANTIC COLORS === */
+    --gt-success: #10b981;
+    --gt-warning: #f59e0b;
+    --gt-danger: #ef4444;
+    --gt-info: #3b82f6;
+
+    /* === TYPOGRAPHY === */
+    --gt-font-primary: 'Inter', sans-serif;
+    --gt-font-heading: 'Outfit', sans-serif;
+    --gt-font-mono: 'JetBrains Mono', monospace;
+
+    /* === BORDER RADIUS === */
+    --gt-radius-sm: 8px;
+    --gt-radius-md: 12px;
+    --gt-radius-lg: 16px;
+    --gt-radius-xl: 24px;
+    --gt-radius-full: 9999px;
+
+    /* === SHADOWS === */
+    --gt-shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+    --gt-shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --gt-shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+    --gt-shadow-xl: 0 16px 48px rgba(0,0,0,0.16);
+    --gt-shadow-glow: 0 0 20px rgba(16, 185, 129, 0.3);
+
+    /* === TRANSITIONS === */
+    --gt-transition-fast: 0.15s ease;
+    --gt-transition-base: 0.3s ease;
+    --gt-transition-slow: 0.5s ease;
+    --gt-transition-spring: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* === SIDEBAR === */
+    --gt-sidebar-width: 280px;
+    --gt-sidebar-collapsed: 80px;
+    --gt-navbar-height: 70px;
+}
+
+/* ===== LIGHT THEME ===== */
+[data-theme="light"] {
+    --gt-bg-primary: #f8fafc;
+    --gt-bg-secondary: #ffffff;
+    --gt-bg-tertiary: #f1f5f9;
+    --gt-bg-card: #ffffff;
+    --gt-bg-sidebar: #0f172a;
+    --gt-bg-navbar: rgba(255, 255, 255, 0.85);
+    --gt-bg-glass: rgba(255, 255, 255, 0.6);
+    --gt-bg-input: #f8fafc;
+
+    --gt-text-primary: #0f172a;
+    --gt-text-secondary: #475569;
+    --gt-text-muted: #94a3b8;
+    --gt-text-inverse: #ffffff;
+    --gt-text-sidebar: #e2e8f0;
+    --gt-text-sidebar-active: #ffffff;
+
+    --gt-border-color: #e2e8f0;
+    --gt-border-light: #f1f5f9;
+    --gt-divider: #e2e8f0;
+
+    --gt-gradient-primary: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    --gt-gradient-secondary: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    --gt-gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    --gt-gradient-card: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(241,245,249,0.9) 100%);
+    --gt-gradient-hero: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 50%, #f8fafc 100%);
+}
+
+/* ===== DARK THEME ===== */
+[data-theme="dark"] {
+    --gt-bg-primary: #0f172a;
+    --gt-bg-secondary: #1e293b;
+    --gt-bg-tertiary: #334155;
+    --gt-bg-card: #1e293b;
+    --gt-bg-sidebar: #0c1222;
+    --gt-bg-navbar: rgba(15, 23, 42, 0.9);
+    --gt-bg-glass: rgba(30, 41, 59, 0.6);
+    --gt-bg-input: #1e293b;
+
+    --gt-text-primary: #f1f5f9;
+    --gt-text-secondary: #94a3b8;
+    --gt-text-muted: #64748b;
+    --gt-text-inverse: #0f172a;
+    --gt-text-sidebar: #94a3b8;
+    --gt-text-sidebar-active: #ffffff;
+
+    --gt-border-color: #334155;
+    --gt-border-light: #1e293b;
+    --gt-divider: #334155;
+
+    --gt-gradient-primary: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    --gt-gradient-secondary: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    --gt-gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    --gt-gradient-card: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(51,65,85,0.5) 100%);
+    --gt-gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+
+    --gt-shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+    --gt-shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+    --gt-shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+    --gt-shadow-xl: 0 16px 48px rgba(0,0,0,0.5);
+}

@@ -41,5 +41,10 @@ if ($result['success']) {
     $role = $result['user']['role'];
     redirect(APP_URL . "/$role/dashboard.php");
 } else {
+    if (isset($result['type']) && $result['type'] === 'unverified') {
+        $_SESSION['pending_email'] = $email;
+        $_SESSION['otp_type'] = 'register';
+        redirect(APP_URL . '/auth/verify-otp.php');
+    }
     redirect(APP_URL . '/auth/login.php?error=' . urlencode($result['message']));
 }

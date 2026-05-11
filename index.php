@@ -34,6 +34,9 @@ if ($isLoggedIn) {
     <link rel="stylesheet" href="<?= APP_URL ?>/assets/css/theme.css">
     <link rel="stylesheet" href="<?= APP_URL ?>/assets/css/main.css">
     
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         /* Landing Page Specific Styles */
         body {
@@ -238,6 +241,40 @@ if ($isLoggedIn) {
         }
         
         .footer-link:hover { color: var(--gt-primary); }
+
+        /* Custom Animations */
+        .floating-img {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-img-slow {
+            animation: float 10s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .feature-icon-sm {
+            width: 45px; height: 45px;
+            background: rgba(16,185,129,0.1);
+            color: var(--gt-primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .shadow-2xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
     </style>
 </head>
 <body>
@@ -278,59 +315,81 @@ if ($isLoggedIn) {
         </div>
         <div class="container position-relative" style="z-index:2">
             <div class="row align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0 animate-slide-up">
-                    <h1>Smart Logistics<br>Made Simple</h1>
-                    <p>GreenTrans revolutionizes the way you manage freight, fleet, and supply chain. Experience real-time tracking, intelligent routing, and seamless operations.</p>
-                    <div class="d-flex gap-3">
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                    <div class="badge-gt mb-3 px-3 py-2" style="font-size:0.8rem; letter-spacing:1px">NEXT-GEN LOGISTICS</div>
+                    <h1>Smart Logistics<br><span style="color:var(--gt-primary)">Made Simple</span></h1>
+                    <p class="mt-4">GreenTrans revolutionizes the way you manage freight, fleet, and supply chain. Experience real-time tracking, intelligent routing, and seamless operations.</p>
+                    <div class="d-flex gap-3 mt-5">
                         <?php if (!$isLoggedIn): ?>
-                        <a href="auth/register.php" class="btn-gt-primary btn-lg">Book a Shipment</a>
+                        <a href="auth/register.php" class="btn-gt-primary btn-lg px-5 shadow-lg">Get Started Now <i class="bi bi-arrow-right ms-2"></i></a>
+                        <?php else: ?>
+                        <a href="<?= $dashboardUrl ?>" class="btn-gt-primary btn-lg px-5 shadow-lg">Go to Dashboard</a>
                         <?php endif; ?>
-                        <a href="#services" class="btn-gt-secondary btn-lg">Explore Features</a>
+                        <a href="#services" class="btn-gt-outline btn-lg px-4">Our Services</a>
                     </div>
-                    <div class="mt-5 d-flex gap-4">
-                        <div>
-                            <h3 class="fw-bold mb-0">10k+</h3>
-                            <span class="text-muted" style="font-size:0.9rem">Deliveries</span>
+                </div>
+                <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="hero-image-wrapper p-2 p-lg-4">
+                        <img src="<?= APP_URL ?>/assets/img/hero.png" alt="Smart Logistics" class="img-fluid floating-img shadow-2xl rounded-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-5" style="background:var(--gt-bg-card); border-bottom:1px solid var(--gt-border-color)">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-3" data-aos="fade-up">
+                    <h2 class="fw-bold mb-0" style="font-family:var(--gt-font-heading); color:var(--gt-primary)">15k+</h2>
+                    <p class="text-muted small text-uppercase fw-bold">Active Users</p>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <h2 class="fw-bold mb-0" style="font-family:var(--gt-font-heading); color:var(--gt-primary)">50k+</h2>
+                    <p class="text-muted small text-uppercase fw-bold">Shipments Delivered</p>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <h2 class="fw-bold mb-0" style="font-family:var(--gt-font-heading); color:var(--gt-primary)">98%</h2>
+                    <p class="text-muted small text-uppercase fw-bold">Customer Satisfaction</p>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <h2 class="fw-bold mb-0" style="font-family:var(--gt-font-heading); color:var(--gt-primary)">24/7</h2>
+                    <p class="text-muted small text-uppercase fw-bold">Global Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Highlight Section -->
+    <section class="section-padding overflow-hidden">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                    <div class="pe-lg-5">
+                        <div class="badge-gt mb-3">SMART TRACKING</div>
+                        <h2 class="fw-bold mb-4" style="font-family:var(--gt-font-heading); font-size:2.8rem">Real-time Visibility at Your Fingertips</h2>
+                        <p class="text-muted mb-4">Never lose sight of your cargo. Our advanced tracking engine provides precise GPS coordinates and milestone updates for every shipment.</p>
+                        
+                        <div class="feature-item d-flex align-items-start mb-4">
+                            <div class="feature-icon-sm me-3"><i class="bi bi-geo-alt-fill"></i></div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Live Map Integration</h5>
+                                <p class="text-muted small mb-0">Interactive maps with dynamic route updates and ETA calculations.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="fw-bold mb-0">99%</h3>
-                            <span class="text-muted" style="font-size:0.9rem">On-Time</span>
-                        </div>
-                        <div>
-                            <h3 class="fw-bold mb-0">500+</h3>
-                            <span class="text-muted" style="font-size:0.9rem">Fleet Size</span>
+                        <div class="feature-item d-flex align-items-start">
+                            <div class="feature-icon-sm me-3"><i class="bi bi-bell-fill"></i></div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Instant Notifications</h5>
+                                <p class="text-muted small mb-0">Get alerted immediately via SMS and Email for status changes.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 animate-slide-left delay-2">
-                    <!-- Glassmorphic Mockup Illustration -->
-                    <div class="glass-card p-4 position-relative">
-                        <div class="position-absolute" style="top:-20px;right:-20px;width:100px;height:100px;background:var(--gt-accent);border-radius:50%;filter:blur(30px);z-index:-1"></div>
-                        <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
-                            <!-- App Window -->
-                            <rect x="20" y="20" width="460" height="360" rx="16" fill="var(--gt-bg-secondary)" stroke="var(--gt-border-color)" stroke-width="2"/>
-                            <!-- Header -->
-                            <rect x="20" y="20" width="460" height="50" rx="16" fill="var(--gt-bg-tertiary)"/>
-                            <circle cx="45" cy="45" r="6" fill="#ef4444"/>
-                            <circle cx="65" cy="45" r="6" fill="#f59e0b"/>
-                            <circle cx="85" cy="45" r="6" fill="#10b981"/>
-                            <!-- Map UI -->
-                            <rect x="40" y="90" width="280" height="150" rx="8" fill="#e2e8f0"/>
-                            <path d="M60 180 Q 150 100 200 150 T 300 120" fill="none" stroke="#6366f1" stroke-width="4" stroke-dasharray="8 8"/>
-                            <circle cx="60" cy="180" r="8" fill="#10b981"/>
-                            <circle cx="300" cy="120" r="8" fill="#ef4444"/>
-                            
-                            <!-- Tracking Card -->
-                            <rect x="340" y="90" width="120" height="270" rx="8" fill="var(--gt-bg-card)" stroke="var(--gt-border-color)"/>
-                            <rect x="355" y="110" width="90" height="10" rx="5" fill="var(--gt-bg-tertiary)"/>
-                            <rect x="355" y="140" width="60" height="8" rx="4" fill="var(--gt-primary)"/>
-                            <rect x="355" y="160" width="80" height="8" rx="4" fill="var(--gt-text-muted)"/>
-                            
-                            <!-- Stats Card -->
-                            <rect x="40" y="260" width="130" height="100" rx="8" fill="var(--gt-gradient-primary)"/>
-                            <rect x="190" y="260" width="130" height="100" rx="8" fill="var(--gt-bg-card)" stroke="var(--gt-border-color)"/>
-                            <text x="105" y="315" font-family="Outfit" font-size="24" fill="#fff" font-weight="bold" text-anchor="middle">In Transit</text>
-                        </svg>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="glass-card p-3 shadow-2xl">
+                        <img src="<?= APP_URL ?>/assets/img/tracking.png" alt="Tracking Dashboard" class="img-fluid rounded-4 shadow-lg">
                     </div>
                 </div>
             </div>
@@ -338,7 +397,7 @@ if ($isLoggedIn) {
     </section>
 
     <!-- 2. ABOUT US SECTION -->
-    <section id="about" class="section-padding bg-transparent">
+    <section id="about" class="section-padding" style="background: var(--gt-bg-secondary)">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0">
@@ -439,6 +498,35 @@ if ($isLoggedIn) {
         </div>
     </section>
 
+    <!-- Global Network Section -->
+    <section class="section-padding overflow-hidden" style="background:var(--gt-bg-sidebar); color:#fff">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0 order-lg-2" data-aos="fade-left">
+                    <div class="ps-lg-5">
+                        <div class="badge-gt mb-3" style="background:rgba(16,185,129,0.2); color:var(--gt-primary); border-color:var(--gt-primary)">GLOBAL REACH</div>
+                        <h2 class="fw-bold mb-4" style="font-family:var(--gt-font-heading); font-size:2.8rem">Connected Across Continents</h2>
+                        <p style="color:rgba(255,255,255,0.7); font-size:1.1rem" class="mb-4">From local deliveries to international freight, GreenTrans connects your business to the global marketplace with efficiency and speed.</p>
+                        
+                        <div class="row g-4 mt-2">
+                            <div class="col-6">
+                                <h3 class="fw-bold mb-1" style="color:var(--gt-primary)">150+</h3>
+                                <p class="small text-uppercase mb-0" style="color:rgba(255,255,255,0.5)">Cities Covered</p>
+                            </div>
+                            <div class="col-6">
+                                <h3 class="fw-bold mb-1" style="color:var(--gt-primary)">12</h3>
+                                <p class="small text-uppercase mb-0" style="color:rgba(255,255,255,0.5)">Global Hubs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1" data-aos="fade-right">
+                    <img src="<?= APP_URL ?>/assets/img/global.png" alt="Global Network" class="img-fluid floating-img-slow rounded-circle shadow-lg" style="max-width:90%">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 4. HOW IT WORKS SECTION -->
     <section id="how-it-works" class="section-padding bg-transparent">
         <div class="container">
@@ -506,7 +594,7 @@ if ($isLoggedIn) {
                         </div>
                         <div>
                             <h5 class="mb-1 fw-bold">Headquarters</h5>
-                            <p class="text-muted mb-0">123 Tech Park, Cyber City, India</p>
+                            <p class="text-muted mb-0">Indrapuri Road no - 3A, Patna, Bihar, India</p>
                         </div>
                     </div>
                     
@@ -613,8 +701,14 @@ if ($isLoggedIn) {
         </div>
     </footer>
 
-    <!-- Script for Navbar scroll effect -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
         window.addEventListener('scroll', function() {
             const navbar = document.querySelector('.landing-navbar');
             if (window.scrollY > 50) {

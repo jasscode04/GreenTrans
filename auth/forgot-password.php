@@ -44,7 +44,7 @@ $error = $_GET['error'] ?? '';
                     <span class="logo-text">GreenTrans</span>
                 </a>
                 <h3>Forgot Password?</h3>
-                <p>Enter your email and we'll send you a reset link</p>
+                <p>Enter your email and we'll send you an OTP code</p>
             </div>
 
             <?php if ($success): ?>
@@ -67,7 +67,7 @@ $error = $_GET['error'] ?? '';
                 </div>
 
                 <button type="submit" class="btn-gt-primary w-100" style="padding:14px;font-size:1rem">
-                    <i class="bi bi-envelope"></i> Send Reset Link
+                    <i class="bi bi-shield-lock"></i> Send OTP Code
                 </button>
             </form>
 

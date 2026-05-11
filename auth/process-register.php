@@ -94,24 +94,23 @@ $result = $user->register([
     'role' => $role,
     'driving_license' => $licenseImage,
     'id_proof' => $idProofImage,
-    'is_approved' => ($role === 'driver' ? 0 : 1) // Drivers need approval, customers are auto-approved
+    'is_approved' => ($role === 'driver' ? 0 : 1), // Drivers need admin approval
+    'is_active' => 0 // Everyone starts inactive until OTP verified
 ]);
 
 if ($result['success']) {
-    // Create driver availability record if driver
-    if ($role === 'driver') {
-        require_once CLASSES_PATH . 'Database.php';
-        $db = new Database();
-        $db->insert('driver_availability', [
-            'driver_id' => $result['user_id'],
-            'is_available' => 0 // Not available until approved
-        ]);
-        
-        $user->logActivity($result['user_id'], 'register', 'Driver account created - pending approval');
-        redirect(APP_URL . '/auth/login.php?success=' . urlencode('Registration successful! Your driver account is pending admin approval.'));
+    require_once CLASSES_PATH . 'Mailer.php';
+    $otp = $user->setOTP($email, 'register');
+    $mailer = new Mailer();
+    
+    if ($mailer->sendOTP($email, $otp, $fullName)) {
+        $_SESSION['pending_email'] = $email;
+        $_SESSION['otp_type'] = 'register';
+        redirect(APP_URL . '/auth/verify-otp.php');
     } else {
-        $user->logActivity($result['user_id'], 'register', 'New customer account created');
-        redirect(APP_URL . '/auth/login.php?success=' . urlencode('Registration successful! Please login.'));
+        // Fallback if mail fails - in a real app, maybe log this or show a different error
+        $errors[] = 'Account created but failed to send verification email. Please contact support.';
+        redirect(APP_URL . '/auth/register.php?error=' . urlencode(implode('. ', $errors)));
     }
 } else {
     redirect(APP_URL . '/auth/register.php?error=' . urlencode($result['message']));

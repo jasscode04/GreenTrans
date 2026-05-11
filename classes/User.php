@@ -38,7 +38,7 @@ class User {
      * Authenticate user login
      */
     public function login($email, $password) {
-        $user = $this->db->fetch("SELECT * FROM users WHERE email = ? AND is_active = 1", [$email]);
+        $user = $this->db->fetch("SELECT * FROM users WHERE email = ?", [$email]);
         
         if (!$user) {
             return ['success' => false, 'message' => 'Invalid email or password'];
@@ -46,6 +46,11 @@ class User {
         
         if (!password_verify($password, $user['password'])) {
             return ['success' => false, 'message' => 'Invalid email or password'];
+        }
+
+        // Check if account is active (verified)
+        if (!$user['is_active']) {
+            return ['success' => false, 'type' => 'unverified', 'message' => 'Your account is not verified. Please enter the OTP sent to your email.'];
         }
         
         // Update last login
@@ -126,6 +131,24 @@ class User {
         return ['success' => true, 'message' => 'Password changed successfully'];
     }
     
+    /**
+     * Set OTP for user
+     */
+    public function setOTP($email, $type = 'register') {
+        $user = $this->getByEmail($email);
+        if (!$user) return false;
+        
+        $otp = sprintf("%06d", mt_rand(100000, 999999));
+        $expiry = date('Y-m-d H:i:s', strtotime('+10 minutes'));
+        
+        $this->db->update('users', [
+            'otp' => $otp,
+            'otp_expiry' => $expiry
+        ], 'id = ?', [$user['id']]);
+        
+        return $otp;
+    }
+
     /**
      * Generate password reset token
      */
